@@ -38,7 +38,7 @@ const barChartOptions = {
     },
     title: {
       display: true,
-      text: 'Book Length Distribution'
+      text: 'Report Length Distribution'
     },
   },
   scales: {
@@ -125,7 +125,7 @@ function App() {
         labels: Array.from(authorBookCount.keys()),
         datasets: [
           {
-            label: 'Book Count',
+            label: 'Report Count',
             data: Array.from(authorBookCount.values()),
             backgroundColor: generateColors(authorBookCount.size), // Adjust for desired number of colors
             borderColor: generateColors(authorBookCount.size), // Adjust for desired number of colors
@@ -185,10 +185,10 @@ function App() {
       <main className='py-4 px-4 space-y-6'>
         <div className='space-x-4'>
           <Button type='primary' size='large' className='rounded-none'>
-            <Link to={`books`}>Books</Link>
+            <Link to={`books`}>Reports</Link>
           </Button>
           <Button type='primary' size='large' className='rounded-none'>
-            <Link to={`authors`}>Authors</Link>
+            <Link to={`authors`}>Employees</Link>
           </Button>
         </div>
         <div className='p-12 flex justify-between' style={{ height: "100%"}}>

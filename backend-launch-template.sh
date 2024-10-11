@@ -11,22 +11,22 @@ sudo yum install -y nodejs
 sudo npm install -g pm2 
 
 # Define variables 
-REPO_URL="https://github.com/learnItRightWay01/react-node-mysql-app.git" 
-BRANCH_NAME="feature/add-logging" 
-REPO_DIR="/home/ec2-user/react-node-mysql-app/backend" 
+REPO_URL="https://github.com/Todaricli/aws-3-tier-app.git" 
+BRANCH_NAME="main" 
+REPO_DIR="/home/ec2-user/aws-3-tier-app/backend" 
 ENV_FILE="$REPO_DIR/.env" 
 
 # Clone the repository 
 cd /home/ec2-user 
 sudo -u ec2-user git clone $REPO_URL 
-cd react-node-mysql-app  
+cd aws-3-tier-app 
 
 # Checkout to the specific branch 
 sudo -u ec2-user git checkout $BRANCH_NAME 
 cd backend 
 
 # Define the log directory and ensure it exists 
-LOG_DIR="/home/ec2-user/react-node-mysql-app/backend/logs" 
+LOG_DIR="/home/ec2-user/aws-3-tier-app/backend/logs" 
 mkdir -p $LOG_DIR 
 sudo chown -R ec2-user:ec2-user $LOG_DIR
 
@@ -59,7 +59,7 @@ sudo tee /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json > /de
       "files": {
         "collect_list": [
           {
-            "file_path": "/home/ec2-user/react-node-mysql-app/backend/logs/*.log",
+            "file_path": "/home/ec2-user/aws-3-tier-app/backend/logs/*.log",
             "log_group_name": "backend-node-app-logs",
             "log_stream_name": "{instance_id}",
             "timestamp_format": "%Y-%m-%d %H:%M:%S"

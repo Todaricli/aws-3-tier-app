@@ -15,9 +15,9 @@ sudo systemctl start nginx
 sudo systemctl enable nginx
 
 # Define variables
-REPO_URL="https://github.com/learnItRightWay01/react-node-mysql-app.git"
-BRANCH_NAME="feature/add-logging"
-REPO_DIR="/home/ec2-user/react-node-mysql-app/frontend"
+REPO_URL="https://github.com/Todaricli/aws-3-tier-app.git"
+BRANCH_NAME="main"
+REPO_DIR="/home/ec2-user/aws-3-tier-app/frontend"
 ENV_FILE="$REPO_DIR/.env"
 APP_TIER_ALB_URL="http://internal-backend-tier-alb-321581222.us-east-1.elb.amazonaws.com"  # Replace with your actual alb endpoint
 API_URL="/api"
@@ -25,14 +25,14 @@ API_URL="/api"
 # Clone the repository as ec2-user
 cd /home/ec2-user
 sudo -u ec2-user git clone $REPO_URL
-cd react-node-mysql-app
+cd aws-3-tier-app
 
 # Checkout to the specific branch
 sudo -u ec2-user git checkout $BRANCH_NAME
 cd frontend
 
 # Ensure ec2-user owns the directory
-sudo chown -R ec2-user:ec2-user /home/ec2-user/react-node-mysql-app
+sudo chown -R ec2-user:ec2-user /home/ec2-user/aws-3-tier-app
 
 # Create .env file with the API_URL
 echo "VITE_API_URL=\"$API_URL\"" >> "$ENV_FILE"

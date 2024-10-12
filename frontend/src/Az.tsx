@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import './Az.css'; // Make sure the CSS file is in the same directory or adjust the path accordingly
 
 // Function to fetch the Availability Zone from a server's response header
 const fetchAvailabilityZone = async () => {
@@ -25,9 +26,9 @@ export default function Az() {
   }, []);
 
   return (
-    <div>
+    <div className="centered-container">
       <header>
-        <h1>Frontend - Availability Zone</h1>
+        <h1>EC2 instance - Availability Zone</h1>
       </header>
       <main>
         <p>Currently running in: {availabilityZone}</p>
@@ -35,4 +36,3 @@ export default function Az() {
     </div>
   );
 }
-

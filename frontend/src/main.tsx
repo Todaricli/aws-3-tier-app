@@ -9,6 +9,7 @@ import './index.css'
 import ErrorPage from './ErrorPage.tsx';
 import BooksPage from './BooksPage.tsx';
 import AuthorsPage from './AuthorsPage.tsx';
+import Az from './Az.tsx';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/authors",
     element: <AuthorsPage />
+  },
+  {
+    path: "/az",
+    element: <Az />
   },
 ]);
 

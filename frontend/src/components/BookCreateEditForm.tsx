@@ -27,7 +27,7 @@ export const BookCreateEditForm = ({ initialValues, authors, onFormInstanceReady
          <Form.Item name="title" label="Title">
             <Input type="text" placeholder="Title" />
          </Form.Item>
-         <Form.Item name="releaseDate" label="Release Date">
+         <Form.Item name="releaseDate" label="Create Date">
             <Input type="date" />
          </Form.Item>
          <Form.Item name="description" label="Description">
@@ -36,9 +36,9 @@ export const BookCreateEditForm = ({ initialValues, authors, onFormInstanceReady
          <Form.Item name="pages" label="Pages">
             <Input type="number" placeholder="Pages" />
          </Form.Item>
-         <Form.Item name="author" label="Author">
+         <Form.Item name="author" label="Employee">
             <Select
-               placeholder="Author"
+               placeholder="Employee"
                options={renderOptions()}
             />
          </Form.Item>

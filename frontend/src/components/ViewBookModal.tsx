@@ -44,7 +44,7 @@ export const ViewBookModal = ({ isModalOpen, book, setIsModalOpen }: Props) => {
 
    return (
       <Modal
-         title="Book Details"
+         title="Report Details"
          open={isModalOpen}
          okButtonProps={{
             hidden: true

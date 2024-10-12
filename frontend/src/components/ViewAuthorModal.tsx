@@ -40,7 +40,7 @@ export const ViewAuthorModal = ({ isModalOpen, author, setIsModalOpen }: Props) 
 
    return (
       <Modal
-         title="Author Details"
+         title="Employee Details"
          open={isModalOpen}
          okButtonProps={{
             hidden: true

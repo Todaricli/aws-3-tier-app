@@ -298,12 +298,12 @@ function BooksPage() {
         <Button size='large' className='rounded-none absolute'>
           <Link to={`/`}>⬅️ Dashboard</Link>
         </Button>
-        <h1 className='text-center font-bold text-5xl'>MANAGE BOOKS</h1>
+        <h1 className='text-center font-bold text-5xl'>MANAGE REPORTS</h1>
       </header>
       <main className='py-4 px-4 space-y-6'>
         <div className='flex justify-between'>
           <Button type='primary' size='large' className='rounded-none' onClick={handleBookAdd}>
-            <span className='font-bold'>+</span>&nbsp; Add Book
+            <span className='font-bold'>+</span>&nbsp; Add Report
           </Button>
           {isSuccessAlertVisible && (
             <Alert

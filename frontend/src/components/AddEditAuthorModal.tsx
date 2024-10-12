@@ -34,7 +34,7 @@ export const AddEditAuthorModal = ({
 
    return (
       <Modal
-         title={isEdit ? 'Edit Author' : 'Add Author'}
+         title={isEdit ? 'Edit Employee' : 'Add Employee'}
          open={isModalOpen}
          okText="Add"
          onOk={handleOk}

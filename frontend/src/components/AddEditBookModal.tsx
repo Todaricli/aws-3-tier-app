@@ -36,7 +36,7 @@ export const AddEditBookModal = ({
 
    return (
       <Modal
-         title={isEdit ? 'Edit Book' : 'Add Book'}
+         title={isEdit ? 'Edit Report' : 'Add Report'}
          open={isModalOpen}
          okText="Add"
          onOk={handleOk}

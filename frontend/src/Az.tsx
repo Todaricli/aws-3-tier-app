@@ -37,7 +37,7 @@ export default function Az() {
 
       const instanceList = ['i-04eccf60eacbd5467', 'i-02cd7f856f63fe63c']
       const azlist = ['us-east-1a', 'us-east-1b']
-      const prob = Math.floor(Math.random() * 1);
+      const prob = Math.random();
       let instance;
 
       if(prob <= 0.5) {

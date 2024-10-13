@@ -180,7 +180,8 @@ function App() {
   return (
     <div className='h-screen w-screen flex flex-col font-mono p-4'>
       <header className='py-2 border-b'>
-        <h1 className='text-center font-bold text-5xl'>Dashboard</h1>
+        <h1 className='text-center font-bold text-5xl'>ERP Dashboard</h1>
+        <h3 className='text-center font-bold'>AnyGroupLLC NZ </h3>
       </header>
       <main className='py-4 px-4 space-y-6'>
         <div className='space-x-4'>

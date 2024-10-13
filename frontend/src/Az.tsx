@@ -6,13 +6,22 @@ const fetchAvailabilityZone = async () => {
   try {
     // Make a request to your backend or an API behind the load balancer
     const response = await fetch('/api/health'); // Replace with your actual API endpoint
+
+    // Fetch from response header
     const azHeader = response.headers.get('X-Availability-Zone');
-    return azHeader || 'Unknown AZ';
+
+    // Fetch from response body as fallback
+    const responseBody = await response.json();
+    const azBody = responseBody.availabilityZone || 'Unknown AZ';
+
+    // Return AZ from header if available, otherwise fallback to body
+    return azHeader || azBody;
   } catch (error) {
     console.error('Error fetching AZ:', error);
     return 'Unknown AZ';
   }
 };
+
 
 export default function Az() {
   const [availabilityZone, setAvailabilityZone] = useState('Fetching...');

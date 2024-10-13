@@ -206,6 +206,8 @@ function App() {
           </div> */}
         </div>
       </main>
+      <footer className='text-center'>Powered by Group 19</footer>
+      <footer className='text-center'>INFOSYS735 GA2</footer>
     </div>
   )
 }

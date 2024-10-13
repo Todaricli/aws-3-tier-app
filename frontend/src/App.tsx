@@ -178,7 +178,7 @@ function App() {
   // };
 
   return (
-    <div className='h-screen font-mono p-4'>
+    <div className='h-screen w-screen flex flex-col font-mono p-4'>
       <header className='py-2 border-b'>
         <h1 className='text-center font-bold text-5xl'>Dashboard</h1>
       </header>
@@ -191,7 +191,7 @@ function App() {
             <Link to={`authors`}>Employees</Link>
           </Button>
         </div>
-        <div className='p-12 flex justify-between' style={{ height: "100%"}}>
+        <div className='p-12 flex flex-col justify-between' style={{ height: "100%"}}>
           <div>
             {pieChartData && <Pie width={500} data={pieChartData} />}
           </div>

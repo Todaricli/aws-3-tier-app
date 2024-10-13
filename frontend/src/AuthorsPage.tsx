@@ -258,7 +258,7 @@ function AuthorsPage() {
    }
 
    return (
-      <div className='h-screen font-mono p-4'>
+      <div className='h-screen w-screen font-mono p-4'>
          <header className='relative py-2 border-b'>
             <Button size='large' className='rounded-none absolute'>
                <Link to={`/`}>⬅️ Dashboard</Link>

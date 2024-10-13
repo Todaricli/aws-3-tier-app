@@ -192,13 +192,13 @@ function App() {
             <Link to={`authors`}>Employees</Link>
           </Button>
         </div>
-        <div className='p-12 flex flex-col justify-between' style={{ height: "100%"}}>
+        <div className='p-12 flex flex-row justify-between' style={{ height: "100%", width: "1000px"}}>
           <div>
             {pieChartData && <Pie width={500} data={pieChartData} />}
           </div>
           <div>
             {booksBarChartData && (<Bar style={{
-              display: "block", boxSizing: "border-box", height: "500px", width: "900px"
+              display: "block", boxSizing: "border-box", height: "500px", width: "800px"
             }} width={1800} height={900} options={barChartOptions} data={booksBarChartData} />)}
           </div>
           {/* <div>

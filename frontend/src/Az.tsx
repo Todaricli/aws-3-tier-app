@@ -29,18 +29,22 @@ export default function Az() {
 
   useEffect(() => {
     const getAZ = async () => {
-      let az = await fetchAvailabilityZone();
+      // let az = await fetchAvailabilityZone();
 
-      if(!(az === 'Unknown AZ')){
-        setAvailabilityZone(az);
-      }
+      // if(!(az === 'Unknown AZ')){
+      //   setAvailabilityZone(az);
+      // }
+
+      const probTime = Math.random() * (3000 - 800) + 800;
+
+      let az;
 
       const instanceList = ['i-04eccf60eacbd5467', 'i-02cd7f856f63fe63c']
       const azlist = ['us-east-1a', 'us-east-1b']
       const prob = Math.random();
       let instance;
 
-      if(prob <= 0.5) {
+      if (prob <= 0.5) {
         instance = instanceList[0]
         az = azlist[0]
       } else {
@@ -48,8 +52,10 @@ export default function Az() {
         az = azlist[1]
       }
 
-      setAvailabilityZone(az);
-      setInstance(instance);
+      setTimeout(() => {
+        setAvailabilityZone(az);
+        setInstance(instance);
+      }, probTime);
     };
 
     getAZ();

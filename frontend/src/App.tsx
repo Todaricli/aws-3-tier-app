@@ -44,7 +44,7 @@ const barChartOptions = {
       font: {
         size: 16,
         family: "'Roboto', sans-serif",
-        weight: 'bold',
+        weight: 'bold' as 'bold',
         color: colorPalette[1],  // Use color from the palette
       },
     },

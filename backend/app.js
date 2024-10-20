@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
 const cors = require('cors');
-const db = require('./configs/db'); // Import the db connection
+const { db, host } = require('./configs/db'); // Import the db connection
 const logger = require('./utils/logger'); // Import logger
 const axios = require('axios'); // Import axios to fetch metadata
 

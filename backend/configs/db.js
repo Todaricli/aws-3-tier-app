@@ -15,4 +15,4 @@ const db = mysql.createConnection({
    database: database
 });
 
-module.exports = db;
+module.exports = { db, host };

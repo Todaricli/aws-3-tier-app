@@ -1,4 +1,4 @@
-const db = require('../configs/db');
+const { db, host } = require('../configs/db');
 const logger = require('../utils/logger'); // Import logger
 
 function AuthorsController() { }

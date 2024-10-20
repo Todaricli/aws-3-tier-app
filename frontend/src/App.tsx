@@ -136,18 +136,22 @@ function App() {
 
   const fetchBooks = async () => {
     try {
+      console.log(`Fetching books from backend: ${API_URL}/books`);
       const response = await fetch(`${API_URL}/books`);
-      const { books, message } = await response.json();
-
+      const { books, verification, dbHost } = await response.json();
+  
       if (!response.ok) {
-        throw new Error(message);
+        throw new Error("error");
       }
-
+      console.log(dbHost);
+      console.log(verification); 
+      console.log('Data received from backend:', books); 
       setBooks(books);
     } catch (error) {
-      console.log(error);
+      console.error('Error fetching data:', error);
     }
   };
+  
 
   return (
     <div className='h-screen w-screen flex flex-col bg-gray-50 text-gray-900 font-sans'>

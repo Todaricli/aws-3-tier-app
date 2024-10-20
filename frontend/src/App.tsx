@@ -161,18 +161,18 @@ function App() {
       </header>
       <main className='h-full py-8 flex flex-col items-center space-y-8'>
         <div className='flex space-x-6'>
-          <Button 
-            type='primary' 
-            size='large' 
-            className='rounded-lg shadow'
+          <Button
+            type='primary'
+            size='large'
+            className='button rounded-lg shadow button-hover-scale'
             style={{ backgroundColor: colorPalette[1], borderColor: colorPalette[1] }}
           >
             <Link to={`books`} style={{ color: 'white' }}>📄 Reports</Link>
           </Button>
-          <Button 
-            type='primary' 
-            size='large' 
-            className='rounded-lg shadow'
+          <Button
+            type='primary'
+            size='large'
+            className='button rounded-lg shadow button-hover-scale'
             style={{ backgroundColor: colorPalette[0], borderColor: colorPalette[0] }}
           >
             <Link to={`authors`} style={{ color: 'white' }}>👥 Employees</Link>
@@ -184,11 +184,11 @@ function App() {
           </div>
           <div className='bg-white p-6 rounded-lg shadow-md'>
             {booksBarChartData && (
-              <Bar 
-                width={800} 
-                height={500} 
-                options={barChartOptions} 
-                data={booksBarChartData} 
+              <Bar
+                width={800}
+                height={500}
+                options={barChartOptions}
+                data={booksBarChartData}
               />
             )}
           </div>

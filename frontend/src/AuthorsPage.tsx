@@ -228,6 +228,7 @@ function AuthorsPage() {
             actions: (
                <div className='flex space-x-2'>
                   <Button 
+                     className='button-hover-scale'
                      icon={<IconEdit />} 
                      onClick={() => handleAuthorEdit(author)} 
                      style={{ 
@@ -238,6 +239,7 @@ function AuthorsPage() {
                      }}
                   />
                   <Button 
+                     className='button-hover-scale'
                      type='primary' 
                      icon={<IconView />} 
                      onClick={() => handleAuthorView(author)} 
@@ -249,6 +251,7 @@ function AuthorsPage() {
                      }}
                   />
                   <Button 
+                     className='button-hover-scale'
                      type='primary' 
                      icon={<IconDelete />} 
                      danger 
@@ -278,7 +281,7 @@ function AuthorsPage() {
          >
             <Button 
                size='large' 
-               className='rounded-lg relative'
+               className='rounded-lg relative button-hover-scale'
                style={{ 
                   backgroundColor: colorPalette[0], 
                   borderColor: colorPalette[0], 
@@ -301,7 +304,7 @@ function AuthorsPage() {
                <Button 
                   type='primary' 
                   size='large' 
-                  className='rounded-full shadow-md' 
+                  className='rounded-full shadow-md button-hover-scale' 
                   onClick={handleAuthorAdd}
                   style={{ 
                      backgroundColor: colorPalette[1], 

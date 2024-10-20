@@ -264,6 +264,7 @@ function BooksPage() {
         actions: (
           <div className='flex space-x-2'>
             <Button
+              className='button-hover-scale'
               icon={<IconEdit />}
               onClick={() => handleBookEdit(book)}
               style={{ 
@@ -274,6 +275,7 @@ function BooksPage() {
               }}
             />
             <Button
+              className='button-hover-scale'
               type='primary'
               icon={<IconView />}
               onClick={() => handleBookView(book)}
@@ -285,6 +287,7 @@ function BooksPage() {
               }}
             />
             <Button
+              className='button-hover-scale'
               type='primary'
               icon={<IconDelete />}
               danger
@@ -315,7 +318,7 @@ function BooksPage() {
       >
         <Button 
           size='large' 
-          className='rounded-lg'
+          className='rounded-lg button-hover-scale'
           style={{ 
             backgroundColor: colorPalette[0], 
             borderColor: colorPalette[0], 
@@ -338,7 +341,7 @@ function BooksPage() {
           <Button 
             type='primary' 
             size='large' 
-            className='rounded-full shadow-md' 
+            className='rounded-full shadow-md button-hover-scale' 
             onClick={handleBookAdd}
             style={{ 
               backgroundColor: colorPalette[1], 

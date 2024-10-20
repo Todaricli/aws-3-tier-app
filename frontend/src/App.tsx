@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button } from 'antd'
-import './App.css'
+import { Button } from 'antd';
+import './App.css';
 import { Link } from 'react-router-dom';
 import {
   Chart as ChartJS,
@@ -16,9 +16,11 @@ import {
 import { Bar, Pie } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
 import { Book } from './models/Books';
-// import { Author } from './models/Author';
 
 const API_URL = import.meta.env.VITE_API_URL;
+
+// Define the color palette
+const colorPalette = ['#f72585', '#7209b7', '#3a0ca3', '#4361ee', '#4cc9f0'];
 
 ChartJS.register(
   ArcElement,
@@ -38,36 +40,45 @@ const barChartOptions = {
     },
     title: {
       display: true,
-      text: 'Report Length Distribution'
+      text: 'Report Length Distribution',
+      font: {
+        size: 16,
+        family: "'Roboto', sans-serif",
+        weight: 'bold',
+        color: colorPalette[1],  // Use color from the palette
+      },
     },
   },
   scales: {
     y: {
-      min: 150,
-      max: 700,
+      min: 100,
+      max: 800,
       ticks: {
-        stepSize: 10
-      }
-    }
-  }
+        stepSize: 50,
+        color: colorPalette[2],  // Use color from the palette
+      },
+    },
+    x: {
+      ticks: {
+        color: colorPalette[3],  // Use color from the palette
+      },
+    },
+  },
 };
 
 function App() {
   const [books, setBooks] = useState<Book[]>([]);
-  // const [authors, setAuthors] = useState<Author[]>([]);
   const [booksBarChartData, setBooksBarChartData] = useState<ChartData<"bar">>();
-  // const [authorsBarChartData, setAuthorsBarChartData] = useState<ChartData<"bar">>();
   const [pieChartData, setPieChartData] = useState<ChartData<"pie">>();
 
   useEffect(() => {
     fetchBooks();
-    // fetchAuthors();
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (books) {
-      const labels = books.map(book => book.title);
-      const data = books.map(book => book.pages);
+      const labels = books.map((book) => book.title);
+      const data = books.map((book) => book.pages);
 
       setBooksBarChartData({
         labels,
@@ -75,37 +86,14 @@ function App() {
           {
             label: "Total Pages",
             data: data,
-            backgroundColor: generateColors(data.length), // Adjust for desired number of colors
-            borderColor: generateColors(data.length), // Adjust for desired number of colors
+            backgroundColor: generateColors(data.length),
+            borderColor: generateColors(data.length),
             borderWidth: 1,
-          }
-        ]
-      })
+          },
+        ],
+      });
     }
   }, [books]);
-
-  // useEffect(() => {
-  //   if (authors) {
-  //     const labels = authors.map(author => author.name);
-  //     const data = authors.map(author => author.birthday).map(birthday => {
-  //       const today = new Date();
-  //       const diffInMs = today.getTime() - new Date(birthday).getTime();
-  //       const age = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 365));
-  //       return age;
-  //     });
-
-  //     setAuthorsBarChartData({
-  //       labels,
-  //       datasets: [
-  //         {
-  //           label: "Age",
-  //           data: data,
-  //           backgroundColor: 'rgba(53, 162, 235, 0.5)'
-  //         }
-  //       ]
-  //     })
-  //   }
-  // }, [authors]);
 
   useEffect(() => {
     if (books) {
@@ -127,8 +115,8 @@ function App() {
           {
             label: 'Report Count',
             data: Array.from(authorBookCount.values()),
-            backgroundColor: generateColors(authorBookCount.size), // Adjust for desired number of colors
-            borderColor: generateColors(authorBookCount.size), // Adjust for desired number of colors
+            backgroundColor: generateColors(authorBookCount.size),
+            borderColor: generateColors(authorBookCount.size),
             borderWidth: 1,
           },
         ],
@@ -136,11 +124,10 @@ function App() {
 
       setPieChartData(chartData);
     }
-  }, [books])
+  }, [books]);
 
   function generateColors(numColors: number) {
     const colors = [];
-    const colorPalette = ['#ff6384', '#38aecc', '#ffd700', '#4caf50', '#9c27b0'];
     for (let i = 0; i < numColors; i++) {
       colors.push(colorPalette[i % colorPalette.length]);
     }
@@ -162,54 +149,57 @@ function App() {
     }
   };
 
-  // const fetchAuthors = async () => {
-  //   try {
-  //     const response = await fetch(`${API_URL}/authors`);
-  //     const { authors, message } = await response.json();
-
-  //     if (!response.ok) {
-  //       throw new Error(message);
-  //     }
-
-  //     setAuthors(authors);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
-    <div className='h-screen w-screen flex flex-col font-mono p-4'>
-      <header className='py-2 border-b'>
-        <h1 className='text-center font-bold text-5xl'>ERP Dashboard</h1>
-        <h3 className='text-center font-bold'>AnyGroupLLC NZ </h3>
+    <div className='h-screen w-screen flex flex-col bg-gray-50 text-gray-900 font-sans'>
+      <header className='py-6 w-full' style={{ backgroundColor: colorPalette[4] }}>
+        <h1 className='text-center font-extrabold text-6xl mb-2' style={{ color: colorPalette[0] }}>
+          ERP Dashboard
+        </h1>
+        <h3 className='text-center text-lg font-light' style={{ color: colorPalette[2] }}>
+          INFOSYS-735 Group 19
+        </h3>
       </header>
-      <main className='py-4 px-4 space-y-6'>
-        <div className='space-x-4'>
-          <Button type='primary' size='large' className='rounded-none'>
-            <Link to={`books`}>Reports</Link>
+      <main className='h-full py-8 flex flex-col items-center space-y-8'>
+        <div className='flex space-x-6'>
+          <Button 
+            type='primary' 
+            size='large' 
+            className='rounded-lg shadow'
+            style={{ backgroundColor: colorPalette[1], borderColor: colorPalette[1] }}
+          >
+            <Link to={`books`} style={{ color: 'white' }}>📄 Reports</Link>
           </Button>
-          <Button type='primary' size='large' className='rounded-none'>
-            <Link to={`authors`}>Employees</Link>
+          <Button 
+            type='primary' 
+            size='large' 
+            className='rounded-lg shadow'
+            style={{ backgroundColor: colorPalette[0], borderColor: colorPalette[0] }}
+          >
+            <Link to={`authors`} style={{ color: 'white' }}>👥 Employees</Link>
           </Button>
         </div>
-        <div className='p-12 flex flex-row justify-between' style={{ height: "100%", width: "1000px"}}>
-          <div>
-            {pieChartData && <Pie width={500} data={pieChartData} />}
+        <div className='flex flex-col md:flex-row justify-between space-x-0 md:space-x-8 space-y-8 md:space-y-0'>
+          <div className='bg-white p-6 rounded-lg shadow-md'>
+            {pieChartData && <Pie width={400} height={400} data={pieChartData} />}
           </div>
-          <div>
-            {booksBarChartData && (<Bar style={{
-              display: "block", boxSizing: "border-box", height: "500px", width: "800px"
-            }} width={1800} height={900} options={barChartOptions} data={booksBarChartData} />)}
+          <div className='bg-white p-6 rounded-lg shadow-md'>
+            {booksBarChartData && (
+              <Bar 
+                width={800} 
+                height={500} 
+                options={barChartOptions} 
+                data={booksBarChartData} 
+              />
+            )}
           </div>
-          {/* <div>
-            {authorsBarChartData && (<Bar width={700} options={barChartOptions} data={authorsBarChartData} />)}
-          </div> */}
         </div>
       </main>
-      <footer className='text-center'>Powered by Group 19</footer>
-      <footer className='text-center'>INFOSYS735 GA2</footer>
+      <footer className='w-full py-4' style={{ backgroundColor: colorPalette[3] }}>
+        <p className='text-center' style={{ color: colorPalette[4] }}>Powered by Group 19</p>
+        <p className='text-center' style={{ color: colorPalette[4] }}>INFOSYS735 GA2</p>
+      </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

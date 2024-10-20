@@ -1,6 +1,6 @@
-import { Alert, Button, Table } from 'antd'
-import './App.css'
-import { useEffect, useState } from 'react'
+import { Alert, Button, Table } from 'antd';
+import './App.css';
+import { useEffect, useState } from 'react';
 import { IconEdit } from './components/IconEdit';
 import { IconDelete } from './components/IconDelete';
 import { IconView } from './components/IconView';
@@ -10,7 +10,11 @@ import { ViewBookModal } from './components/ViewBookModal';
 import { DeleteBookModal } from './components/DeleteBookModal';
 import { Book, BookDTO, BookFormDTO } from './models/Books';
 import { Author } from './models/Author';
+
 const API_URL = import.meta.env.VITE_API_URL;
+
+// Define the color palette
+const colorPalette = ['#f72585', '#7209b7', '#3a0ca3', '#4361ee', '#4cc9f0'];
 
 const columns = [
   {
@@ -34,7 +38,7 @@ const columns = [
     key: 'releaseDate',
   },
   {
-    title: 'Author',
+    title: 'Employee',
     dataIndex: 'author',
     key: 'author',
   },
@@ -71,12 +75,12 @@ function BooksPage() {
   useEffect(() => {
     fetchBooks();
     fetchAuthors();
-  }, [])
+  }, []);
 
   useEffect(() => {
     formatBooksForDisplay(books);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [books])
+  }, [books]);
 
   const fetchBooks = async () => {
     try {
@@ -93,10 +97,7 @@ function BooksPage() {
 
       setMessage((error as Error).message);
       setIsErrorAlertVisible(true);
-
-      setTimeout(() => {
-        setIsErrorAlertVisible(false);
-      }, 5000);
+      setTimeout(() => setIsErrorAlertVisible(false), 5000);
     }
   };
 
@@ -115,10 +116,7 @@ function BooksPage() {
 
       setMessage((error as Error).message);
       setIsErrorAlertVisible(true);
-
-      setTimeout(() => {
-        setIsErrorAlertVisible(false);
-      }, 5000);
+      setTimeout(() => setIsErrorAlertVisible(false), 5000);
     }
   };
 
@@ -142,22 +140,16 @@ function BooksPage() {
         setBooks(books);
         setMessage(message);
         setIsSuccessAlertVisible(true);
-
-        setTimeout(() => {
-          setIsSuccessAlertVisible(false);
-        }, 5000);
+        setTimeout(() => setIsSuccessAlertVisible(false), 5000);
       }
     } catch (error) {
       console.error(error);
 
       setMessage((error as Error).message);
       setIsErrorAlertVisible(true);
-
-      setTimeout(() => {
-        setIsErrorAlertVisible(false);
-      }, 5000);
+      setTimeout(() => setIsErrorAlertVisible(false), 5000);
     }
-  }
+  };
 
   const addBook = async (book: BookFormDTO) => {
     try {
@@ -178,21 +170,15 @@ function BooksPage() {
       setBooks(books);
       setMessage(message);
       setIsSuccessAlertVisible(true);
-
-      setTimeout(() => {
-        setIsSuccessAlertVisible(false);
-      }, 5000);
+      setTimeout(() => setIsSuccessAlertVisible(false), 5000);
     } catch (error) {
       console.error(error);
 
       setMessage((error as Error).message);
       setIsErrorAlertVisible(true);
-
-      setTimeout(() => {
-        setIsErrorAlertVisible(false);
-      }, 5000);
+      setTimeout(() => setIsErrorAlertVisible(false), 5000);
     }
-  }
+  };
 
   const bookAddEdit = (book: BookFormDTO) => {
     if (isEdit) {
@@ -201,7 +187,7 @@ function BooksPage() {
     }
 
     addBook(book);
-  }
+  };
 
   const bookDelete = async () => {
     try {
@@ -222,88 +208,146 @@ function BooksPage() {
         setBooks(books);
         setMessage(message);
         setIsSuccessAlertVisible(true);
-
-        setTimeout(() => {
-          setIsSuccessAlertVisible(false);
-        }, 5000);
+        setTimeout(() => setIsSuccessAlertVisible(false), 5000);
       }
     } catch (error) {
       console.error(error);
 
       setMessage((error as Error).message);
       setIsErrorAlertVisible(true);
-
-      setTimeout(() => {
-        setIsErrorAlertVisible(false);
-      }, 5000);
+      setTimeout(() => setIsErrorAlertVisible(false), 5000);
     }
-  }
+  };
 
   const handleBookAdd = () => {
     setActiveBook(undefined);
     setIsEdit(false);
     setIsAddEditModalOpen(true);
-  }
+  };
 
   const handleBookEdit = (book: Book) => {
     setActiveBook(book);
     setIsEdit(true);
     setIsAddEditModalOpen(true);
-  }
+  };
 
   const handleBookView = (book: Book) => {
     setActiveBook(book);
     setIsViewModalOpen(true);
-  }
+  };
 
   const handleBookDelete = (book: Book) => {
     setActiveBook(book);
     setIsDeleteModalOpen(true);
-  }
+  };
+
+  const formatDateToDDMMYYYY = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${day}/${month}/${year}`; // Format: DD/MM/YYYY
+  };
 
   const formatBooksForDisplay = (books: Book[]) => {
     if (books.length > 0) {
-      const dataSource: BookDTO[] = [];
-
-      for (const book of books) {
-        const bookObj = {
-          key: book.id,
-          id: book.id,
-          title: book.title,
-          releaseDate: book.releaseDate,
-          description: book.description,
-          pages: book.pages,
-          author: book?.name,
-          createdAt: book.createdAt,
-          updatedAt: book.updatedAt,
-          actions: (
-            <div className='flex space-x-4'>
-              <Button icon={<IconEdit />} onClick={() => handleBookEdit(book)} />
-              <Button type='primary' icon={<IconView />} onClick={() => handleBookView(book)} />
-              <Button type='primary' icon={<IconDelete />} danger onClick={() => handleBookDelete(book)} />
-            </div>
-          )
-        }
-
-        dataSource.push(bookObj);
-      }
+      const dataSource: BookDTO[] = books.map((book) => ({
+        key: book.id,
+        id: book.id,
+        title: book.title,
+        releaseDate: formatDateToDDMMYYYY(book.releaseDate),
+        description: book.description,
+        pages: book.pages,
+        author: book?.name,
+        createdAt: formatDateToDDMMYYYY(book.createdAt),
+        updatedAt: formatDateToDDMMYYYY(book.updatedAt),
+        actions: (
+          <div className='flex space-x-2'>
+            <Button
+              icon={<IconEdit />}
+              onClick={() => handleBookEdit(book)}
+              style={{ 
+                backgroundColor: colorPalette[1], 
+                borderColor: colorPalette[1], 
+                color: 'white',
+                borderRadius: '8px' 
+              }}
+            />
+            <Button
+              type='primary'
+              icon={<IconView />}
+              onClick={() => handleBookView(book)}
+              style={{ 
+                backgroundColor: colorPalette[3], 
+                borderColor: colorPalette[3], 
+                color: 'white',
+                borderRadius: '8px' 
+              }}
+            />
+            <Button
+              type='primary'
+              icon={<IconDelete />}
+              danger
+              onClick={() => handleBookDelete(book)}
+              style={{ 
+                backgroundColor: colorPalette[0], 
+                borderColor: colorPalette[0], 
+                color: 'white',
+                borderRadius: '8px' 
+              }}
+            />
+          </div>
+        )
+      }));
 
       setDataSource(dataSource);
     }
-  }
+  };
 
   return (
-    <div className='h-screen w-screen font-mono p-4'>
-      <header className='relative py-2 border-b'>
-        <Button size='large' className='rounded-none absolute'>
-          <Link to={`/`}>⬅️ Dashboard</Link>
+    <div 
+      className='min-h-screen w-screen font-sans p-6'
+      style={{ backgroundColor: colorPalette[4], padding: '30px', borderRadius: '12px' }}
+    >
+      <header 
+        className='flex items-center flex-start relative py-8  shadow-lg' 
+        style={{ backgroundColor: colorPalette[3], borderRadius: '12px', marginBottom: '20px' }}
+      >
+        <Button 
+          size='large' 
+          className='rounded-lg'
+          style={{ 
+            backgroundColor: colorPalette[0], 
+            borderColor: colorPalette[0], 
+            color: 'white', 
+            fontWeight: 'bold',
+            margin: '10px' 
+          }}
+        >
+          <Link to={`/`} style={{ color: 'white' }}>⬅️ Dashboard</Link>
         </Button>
-        <h1 className='text-center font-bold text-5xl'>MANAGE REPORTS</h1>
+        <h1 
+          className='absolute left-1/2 transform -translate-x-1/2 text-center font-extrabold text-5xl' 
+          style={{ color: 'white', margin: '0' }}
+        >
+          Manage Reports
+        </h1>
       </header>
-      <main className='py-4 px-4 space-y-6'>
-        <div className='flex justify-between'>
-          <Button type='primary' size='large' className='rounded-none' onClick={handleBookAdd}>
-            <span className='font-bold'>+</span>&nbsp; Add Report
+      <main className='space-y-6'>
+        <div className='flex justify-between items-center mb-4'>
+          <Button 
+            type='primary' 
+            size='large' 
+            className='rounded-full shadow-md' 
+            onClick={handleBookAdd}
+            style={{ 
+              backgroundColor: colorPalette[1], 
+              borderColor: colorPalette[1], 
+              color: 'white', 
+              fontWeight: 'bold' 
+            }}
+          >
+            + Add Report
           </Button>
           {isSuccessAlertVisible && (
             <Alert
@@ -311,6 +355,11 @@ function BooksPage() {
               type="success"
               showIcon
               closable
+              style={{ 
+                backgroundColor: colorPalette[4], 
+                color: colorPalette[2],
+                borderRadius: '12px' 
+              }}
             />
           )}
           {isErrorAlertVisible && (
@@ -319,10 +368,15 @@ function BooksPage() {
               type="error"
               showIcon
               closable
+              style={{ 
+                backgroundColor: colorPalette[0], 
+                color: 'white',
+                borderRadius: '12px' 
+              }}
             />
           )}
         </div>
-        <div>
+        <div className='bg-white p-6 rounded-lg shadow-lg'>
           <Table dataSource={dataSource} columns={columns} size="middle" />
         </div>
       </main>
@@ -334,10 +388,19 @@ function BooksPage() {
         setIsModalOpen={setIsAddEditModalOpen}
         onOk={bookAddEdit}
       />
-      <ViewBookModal book={activeBook && { ...activeBook, author: activeBook?.name }} isModalOpen={isViewModalOpen} setIsModalOpen={setIsViewModalOpen} />
-      <DeleteBookModal book={activeBook} isModalOpen={isDeleteModalOpen} setIsModalOpen={setIsDeleteModalOpen} onOk={bookDelete} />
+      <ViewBookModal 
+        book={activeBook && { ...activeBook, author: activeBook?.name }} 
+        isModalOpen={isViewModalOpen} 
+        setIsModalOpen={setIsViewModalOpen} 
+      />
+      <DeleteBookModal 
+        book={activeBook} 
+        isModalOpen={isDeleteModalOpen} 
+        setIsModalOpen={setIsDeleteModalOpen} 
+        onOk={bookDelete} 
+      />
     </div>
-  )
+  );
 }
 
-export default BooksPage
+export default BooksPage;
